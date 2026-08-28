@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: #000;
+  color: #1f2937;
+  overscroll-behavior: none;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Hide scrollbars on the swipe feed while keeping scroll behaviour */
+.snap-y::-webkit-scrollbar {
+  display: none;
+}
+.snap-y {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Leaflet popup styling to match the brand */
+.leaflet-popup-content-wrapper {
+  border-radius: 14px;
+}
+.leaflet-popup-content {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #1f2937;
+}
+.leaflet-container {
+  font-family: inherit;
+  background: #eae7dd;
+}
