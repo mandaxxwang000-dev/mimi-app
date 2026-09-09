@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { Cat, Loader2, MapPin } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function AuthScreen() {
@@ -10,6 +11,26 @@ export default function AuthScreen() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
+    // Forgot Password Function
+  const handleForgotPassword = async () => {
+    if (!email) {
+      setError('Please enter your email address first.');
+      return;
+    }
+
+    setBusy(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: window.location.origin + '/reset-password',
+    });
+    setBusy(false);
+
+    if (error) {
+      setError(error.message);
+    } else {
+      setError(null);
+      alert('📧 Password reset email sent! Check your inbox.');
+    }
+  };
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -101,7 +122,18 @@ export default function AuthScreen() {
                 {error}
               </p>
             )}
-
+{/* Forgot Password - Add this right after the password input */}
+{mode === 'signin' && (
+  <div className="text-right mb-4">
+    <button
+      type="button"
+      onClick={handleForgotPassword}
+      className="text-sm text-[#2D6A4F] hover:underline"
+    >
+      Forgot password?
+    </button>
+  </div>
+)}
             <button
               type="submit"
               disabled={busy}

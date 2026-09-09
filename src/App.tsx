@@ -1,3 +1,4 @@
+import ResetPassword from '@/pages/ResetPassword';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
@@ -26,11 +27,11 @@ function Shell() {
   const loadData = useCallback(async () => {
     if (!user) return;
     setDataError(null);
-    const [spotsRes, dealsRes, sheltersRes, likesRes] = await Promise.all([
-      supabase.from('cat_spots').select('*').order('created_at', { ascending: false }),
-      supabase.from('venue_deals').select('*').order('created_at', { ascending: true }),
-      supabase.from('shelters').select('*').order('created_at', { ascending: true }),
-      supabase.from('cat_likes').select('cat_spot_id'),
+       const [spotsRes, dealsRes, sheltersRes, likesRes] = await Promise.all([
+      supabase.from('cat_spots').select('*').order('created_at'),
+      supabase.from('venue_deals').select('*').order('created_at'),
+      supabase.from('shelters').select('*').order('created_at'),
+      supabase.from('likes').select('*') // Make sure 'likes' is the name of your table
     ]);
 
     if (spotsRes.error || dealsRes.error || sheltersRes.error) {

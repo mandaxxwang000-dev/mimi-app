@@ -1,6 +1,6 @@
 import { Compass, Map as MapIcon, Store, User, Plus } from 'lucide-react';
 
-export type Tab = 'discover' | 'map' | 'explore' | 'profile';
+export type Tab = 'discover' | 'map' | 'explore' | 'profile' | 'add';
 
 const TABS: { id: Tab; label: string; icon: typeof Compass }[] = [
   { id: 'discover', label: 'Discover', icon: Compass },
